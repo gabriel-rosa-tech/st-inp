@@ -539,7 +539,9 @@ with tab_projeto:
                 ipeadata.to_pickle('df_fob.pkl')
             
         except Exception:
-            ipeadata = pd.read_pickle('ipeadata.pkl')
+            file = open('./df_fob.pkl', 'rb')
+            df_fob = pickle.load(file)
+            file.close()
 
         # Tratamento no Dataframe
         ipeadata.columns = ['Data', 'Preco']
