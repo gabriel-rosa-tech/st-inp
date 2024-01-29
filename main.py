@@ -504,6 +504,7 @@ with tab_projeto:
             inp_periodo_agrupamento = st.selectbox('Periodo', ['Anual','Mensal', 'Semanal'])
             inp_funcao = st.multiselect('Função', ['Soma', 'Média', 'Min', 'Max'])
             df_fob['WeekNumber'] = df_fob['data'].dt.isocalendar().week
+            df_fob['mes'] = df_fob['data'].dt.month
 
             fig_graph = criar_figura_matplotlib_agrupado(df_fob, inp_funcao, inp_periodo_agrupamento)
             st.plotly_chart(fig_graph)
