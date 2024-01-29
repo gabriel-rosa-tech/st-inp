@@ -513,7 +513,7 @@ with tab_projeto:
         if chbox_agrupar:
             
             inp_periodo_agrupamento = st.selectbox('Periodo', ['Anual','Mensal', 'Semanal'])
-            inp_funcao = st.multiselect('Função', ['Soma', 'Média', 'Min', 'Max'])
+            inp_funcao = st.multiselect('Função', ['Soma', 'Média', 'Min', 'Max'], default='Média')
             df_fob['WeekNumber'] = df_fob['data'].dt.isocalendar().week
             df_fob['mes'] = df_fob['data'].dt.month
 
