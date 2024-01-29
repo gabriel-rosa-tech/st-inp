@@ -334,14 +334,14 @@ def criar_figura_matplotlib(dataframe, x_col, y_col, tipo_grafico='scatter', tit
         ax.bar(dataframe[x_col], dataframe[y_col])
     elif tipo_grafico == 'line':
         ax.plot(dataframe[x_col], dataframe[y_col])
-        for evento, data in eventos.items():
-            ax.axvline(pd.to_datetime(data), linestyle='--', label=evento)
-            ax.legend()
+        # for evento, data in eventos.items():
+        #     ax.axvline(pd.to_datetime(data), linestyle='--', label=evento)
+        #     ax.legend()
     # Adicione mais opções conforme necessário
     ax.grid()
     ax.set_title(titulo, {'color': 'red'})
-    ax.set_xlabel(xlabel)
-    ax.set_ylabel(ylabel)
+    ax.set_xlabel(xlabel, {'color': 'red'})
+    ax.set_ylabel(ylabel, {'color': 'red'})
 
     return fig
 
@@ -501,35 +501,33 @@ with tab_projeto:
 
             fig_graph = criar_figura_matplotlib_agrupado(df_fob, inp_funcao, inp_periodo_agrupamento)
             st.plotly_chart(fig_graph)
-            # if inp_funcao == 'Soma':
-            #     df_fob_grouped = df_fob.groupby(dic_group_keys[inp_periodo_agrupamento]).sum()
-            #     df_fob_grouped['x'] = df_fob_grouped.index 
-
-            # elif inp_funcao == 'Média':
-            #     df_fob_grouped = df_fob.groupby(dic_group_keys[inp_periodo_agrupamento]).mean()
-            #     df_fob_grouped['x'] = df_fob_grouped.index 
-
-            # elif inp_funcao == 'Min':
-            #     df_fob_grouped = df_fob.groupby(dic_group_keys[inp_periodo_agrupamento]).min()
-            #     df_fob_grouped['x'] = df_fob_grouped.index 
-
-            # elif inp_funcao == 'Max':
-            #     df_fob_grouped = df_fob.groupby(dic_group_keys[inp_periodo_agrupamento]).max()
-            #     df_fob_grouped['x'] = df_fob_grouped.index 
-            
-            # st.line_chart(data=df_fob_grouped, x='x', y='preco')
 
         else:
+            # eventos = {
+            #     'Crise Financeira de 2008': '2008-01-01',
+            #     'Primavera Árabe': '2011-01-01',
+            #     'Pandemia de COVID-19': '2020-01-01',
+            #     'Tendência de Energias Renováveis': '2020-01-01'  # Supondo que a tendência começou em 2020
+            # }
+            st.markdown(" <h3>Eventos</h3> \
+                            <p>Acontecimentos que podem ter tido relação direta com os valores apresentados</p>\
+                            <li>Crise Financeira Americana (2008)</li> \
+            <li>Primavera Árabe (2011)</li>\
+            <li>Pandemia de COVID-19 (2019)</li> \
+            <li>Tendência de Energias Renováveis (2020)</li> ", unsafe_allow_html=True)
+
             st.write('Contagem dos registros: ' + str(df_fob.shape[0]))
 
-            inp_valores =  st.multiselect('Valores de analise', ['preco', 'aumento','aceleracao'], 'preco')
-            if len(inp_valores) > 0:
-                st.line_chart(data=df_fob, x='data', y=inp_valores)
+            # inp_valores =  st.multiselect('Valores de analise', ['preco', 'aumento','aceleracao'], 'preco')
+            # if len(inp_valores) > 0:
+            #     st.line_chart(data=df_fob, x='data', y=inp_valores)
 
-            st.plotly_chart(criar_figura_matplotlib(df_fob,'data','preco',tipo_grafico='line',titulo='Variação do preço do petroleo',
+            st.write('Variação do preço do petróleo')
+            st.plotly_chart(criar_figura_matplotlib(df_fob,'data','preco',tipo_grafico='line',titulo='',
                                                     xlabel='Data', ylabel='Preço'))
             
-            st.plotly_chart(criar_figura_matplotlib(df_fob,'data','preco',tipo_grafico='hist',titulo='Composição do preço do petroleo',
+            st.write('Composição do preço do petróleo')
+            st.plotly_chart(criar_figura_matplotlib(df_fob,'data','preco',tipo_grafico='hist',titulo='',
                                                     xlabel='Data', ylabel='Preço'))
 
     with st.expander('Modelo'):
@@ -538,10 +536,10 @@ with tab_projeto:
         try:
             with st.spinner('Carregando dados mais atualizados para o modelo'):
                 ipeadata = pd.read_html(r"http://www.ipeadata.gov.br/ExibeSerie.aspx?module=m&serid=1650971490&oper=view", encoding='utf-8', header=0)[2]
-                ipeadata.to_pickle(os.path.join(PATH, 'df_fob.pkl'))
+                ipeadata.to_pickle('df_fob.pkl')
             
         except Exception:
-            ipeadata = pd.read_pickle(os.path.join(PATH, 'ipeadata.pkl'))
+            ipeadata = pd.read_pickle('ipeadata.pkl')
 
         # Tratamento no Dataframe
         ipeadata.columns = ['Data', 'Preco']
