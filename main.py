@@ -392,7 +392,7 @@ def criar_figura_matplotlib_agrupado(df, tipos_agrupamento:list, periodo):
             df_fob_grouped = group_min(df, periodo)
         elif tipo == 'Max':
             df_fob_grouped = group_max(df, periodo)
-        ax.legend([tipo], loc='upper left')
+        ax.legend([tipo], loc='center')
         ax.plot(df_fob_grouped['x'], df_fob_grouped['preco'])
         ax.set_xlabel('Periodo', {'color': 'red'})
         ax.set_ylabel('Preço', {'color': 'red'})
@@ -621,5 +621,5 @@ with tab_fonte:
     st.subheader('Membros')
     st.markdown("<li>Barbara Campos</li> \
             <li>Brendon Calazans</li>\
-            <li>Carlos Eduardo</li> \
+            <li>Carlos Eduardo Miranda</li> \
             <li>Gabriel Rosa</li>", unsafe_allow_html=True)
