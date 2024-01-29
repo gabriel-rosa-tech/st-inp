@@ -606,10 +606,15 @@ with tab_projeto:
             fig = go.Figure()
             fig.add_trace(go.Scatter(x=df_and_future.index, y=df_and_future['preco'], mode='lines', name='valores reais'))
             fig.add_trace(go.Scatter(x=df_and_future.index, y=df_and_future['pred'], mode='lines', name='valores preditos'))
-
-            col1, col2 = st.columns(2)
-            col1.plotly_chart(fig)
-            col2.write(df_and_future.tail())
+        
+            dic_periodo = {
+                'Semanal': 7,
+                'Quinzenal': 15,
+                'Mensal': 30
+            }
+            
+            st.plotly_chart(fig)
+            st.write(df_and_future.tail(dic_periodo[periodo]))
         else:
             pass
 
