@@ -351,7 +351,7 @@ def group_sum(df, periodo):
 
 def group_mean(df, periodo):
     st.write('df_media')
-    st.write(df.head())
+    df = df[['preco', dic_group_keys[periodo]]]
     df_fob_grouped = df.groupby(dic_group_keys[periodo]).mean()
     df_fob_grouped['x'] = df_fob_grouped.index 
     return df_fob_grouped
