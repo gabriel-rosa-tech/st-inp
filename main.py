@@ -368,15 +368,23 @@ def group_max(df, periodo):
 
 def criar_figura_matplotlib_agrupado(df, tipos_agrupamento:list, periodo):
     fig, ax = plt.subplots(figsize=(10, 7))
-    dic_tipo = {
-        'Soma': group_sum(df, periodo),
-        'Média': group_mean(df, periodo),
-        'Min': group_min(df, periodo),
-        'Max': group_max(df, periodo)
-    }
+    #dic_tipo = {
+    #    'Soma': group_sum(df, periodo),
+    #    'Média': group_mean(df, periodo),
+    #    'Min': group_min(df, periodo),
+    #    'Max': group_max(df, periodo)
+    #}
     
     for tipo in tipos_agrupamento:
-        df_fob_grouped = dic_tipo[tipo]
+        if tipo == 'Soma':
+            df_fob_grouped = group_sum(df, periodo)
+        elif tipo == 'Média':
+            df_fob_grouped = group_mean(df, periodo)
+        elif tipo == 'Min':
+            df_fob_grouped = group_min(df, periodo)
+        elif tipo == 'Max':
+            df_fob_grouped = group_max(df, periodo)
+        #df_fob_grouped = dic_tipo[tipo]
         ax.plot(df_fob_grouped['x'], df_fob_grouped['preco'])
     
     return fig
