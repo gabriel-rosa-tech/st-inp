@@ -418,7 +418,7 @@ tab_projeto, tab_fonte = st.tabs(['Projeto', 'Fonte'])
 
 with tab_projeto:
     st.write('''
-        O projeto apresentado, usa dados do preço do barril do petrole bruto Brent (FOB) 
+        O projeto apresentado, usa dados do preço do barril do petrólep bruto Brent (FOB) 
         extraídos do site Energy Information Administration (EIA) - http://www.eia.doe.gov 
         para elaborar um modelo da previsão dos dados. Preço por barril do petróleo bruto tipo Brent. 
         Produzido no Mar do Norte (Europa), 
@@ -433,10 +433,10 @@ with tab_projeto:
 
     st.write('O dicionario dos dados é o seguinte:')
     st.write({
-        'Data': 'Dia da negociação do barril de petroleo bruto',
-        'Preço': 'Valor em dolar do barril do petroleo bruto',
+        'Data': 'Dia da negociação do barril de petróleo bruto',
+        'Preço': 'Valor em dolar do barril do petróleo bruto',
         'Ano': 'Valor isolado do ano em questão da negociação',
-        'Aumento': 'Variavação do preço do petroleo em relação aos dias de negociação',
+        'Aumento': 'Variavação do preço do petróleo em relação aos dias de negociação',
         'Aceleração': 'Cálculo de como a variação do preço se multiplica',
         'Dia da semana': 'Valor do dia da semana'
     })
@@ -606,8 +606,10 @@ with tab_projeto:
             fig = go.Figure()
             fig.add_trace(go.Scatter(x=df_and_future.index, y=df_and_future['preco'], mode='lines', name='valores reais'))
             fig.add_trace(go.Scatter(x=df_and_future.index, y=df_and_future['pred'], mode='lines', name='valores preditos'))
-            
-            st.plotly_chart(fig)
+
+            col1, col2 = st.columns(2)
+            col1.plotly_chart(fig)
+            col2.write(df_and_future.tail())
         else:
             pass
 
