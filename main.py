@@ -507,16 +507,11 @@ with tab_projeto:
             df_fob['WeekNumber'] = df_fob['data'].dt.isocalendar().week
             df_fob['mes'] = df_fob['data'].dt.month
 
+            st.write('Variação do preço agrupado pelo período')
             fig_graph = criar_figura_matplotlib_agrupado(df_fob, inp_funcao, inp_periodo_agrupamento)
             st.plotly_chart(fig_graph)
 
         else:
-            # eventos = {
-            #     'Crise Financeira de 2008': '2008-01-01',
-            #     'Primavera Árabe': '2011-01-01',
-            #     'Pandemia de COVID-19': '2020-01-01',
-            #     'Tendência de Energias Renováveis': '2020-01-01'  # Supondo que a tendência começou em 2020
-            # }
             st.markdown(" <h3>Eventos</h3> \
                             <p>Acontecimentos que podem ter tido relação direta com os valores apresentados</p>\
                             <li>Crise Financeira Americana (2008)</li> \
