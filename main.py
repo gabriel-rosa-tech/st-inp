@@ -614,7 +614,7 @@ with tab_projeto:
             }
             
             st.plotly_chart(fig)
-            st.write(df_and_future.tail(dic_periodo[periodo]))
+            st.write(df_and_future[['pred']].tail(dic_periodo[periodo]))
         else:
             pass
 
