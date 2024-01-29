@@ -345,6 +345,12 @@ def criar_figura_matplotlib(dataframe, x_col, y_col, tipo_grafico='scatter', tit
 
     return fig
 
+dic_group_keys = {
+                'Anual': 'ano',
+                'Mensal': 'mes',
+                'Semanal': 'WeekNumber'
+            }
+
 def group_sum(df, periodo):
     df_fob_grouped = df.groupby(dic_group_keys[periodo]).sum()
     df_fob_grouped['x'] = df_fob_grouped.index 
@@ -490,11 +496,7 @@ with tab_projeto:
         chbox_agrupar = st.checkbox('Agrupar')
         
         if chbox_agrupar:
-            dic_group_keys = {
-                'Anual': 'ano',
-                'Mensal': 'mes',
-                'Semanal': 'WeekNumber'
-            }
+            
             inp_periodo_agrupamento = st.selectbox('Periodo', ['Anual','Mensal', 'Semanal'])
             inp_funcao = st.multiselect('Função', ['Soma', 'Média', 'Min', 'Max'])
             df_fob['WeekNumber'] = df_fob['data'].dt.isocalendar().week
