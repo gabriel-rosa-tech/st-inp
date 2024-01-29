@@ -614,6 +614,8 @@ with tab_projeto:
             }
             
             st.plotly_chart(fig)
+
+            st.write('Previsão para o periodo selecionado de ' + str(dic_periodo[periodo]) + ' dias')
             st.write(df_and_future[['pred']].tail(dic_periodo[periodo]))
         else:
             pass
