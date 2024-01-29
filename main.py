@@ -48,14 +48,7 @@ def correct_value_with_separators(row):
     after_dot = str(value)[-2:]
     new_value = before_dot + "." + after_dot
     return new_value
-
-def correct_value_with_separators(row):
-    value = row['Preco']
-    before_dot = str(value)[:-2]
-    after_dot = str(value)[-2:]
-    new_value = before_dot + "." + after_dot
-    return new_value
-
+    
 def calculate_moving_averages(df, target, windows): #adicionar colunas de média móvel ao dataframe para modelo
     for window in windows:
         ma_col_name = f'{target}_ma_{window}'
@@ -441,7 +434,8 @@ with tab_projeto:
     para a realização de projetos de mineração de dados.
     Ele proporciona uma estrutura organizada em diversas etapas, incluindo:
 
-    1. **Entendimento do Negócio (Business Understanding):** - Compreender os objetivos de negócio relacionados ao preço do petróleo, 
+    1. **Entendimento do Negócio (Business Understanding):** 
+    - Compreender os objetivos de negócio relacionados ao preço do petróleo, 
         como prever tendências, identificar fatores de influência e tomar decisões estratégicas.
 
     2. **Entendimento dos Dados (Data Understanding):**
@@ -482,7 +476,7 @@ with tab_projeto:
                                         min_value=df_fob['data'].iloc[-1],
                                         max_value=df_fob['data'].iloc[-1])
         
-        inp_dt_fim = col2.date_input('Data Inicio', value=df_fob['data'].iloc[1],
+        inp_dt_fim = col2.date_input('Data Fim', value=df_fob['data'].iloc[1],
                                     min_value=df_fob['data'].iloc[1],
                                     max_value=df_fob['data'].iloc[1])
 
