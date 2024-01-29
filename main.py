@@ -540,7 +540,7 @@ with tab_projeto:
             
         except Exception:
             file = open('./df_fob.pkl', 'rb')
-            df_fob = pickle.load(file)
+            ipeadata = pickle.load(file)
             file.close()
 
         # Tratamento no Dataframe
