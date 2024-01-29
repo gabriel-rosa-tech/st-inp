@@ -270,13 +270,16 @@ def conv_float(s):
         return None
 
 def transform_dataframe_web():
-    dfs_fob = pd.read_html('http://www.ipeadata.gov.br/ExibeSerie.aspx?module=m&serid=1650971490&oper=view')
-    df_fob = dfs_fob[2]
-    df_fob.columns = ['data', 'preco']
-    df_fob.drop(index=0, inplace=True)
-    df_fob['preco'] = df_fob['preco'].apply(conv_float)
-    df_fob['data'] = pd.to_datetime(df_fob['data'], format='%d/%m/%Y')
-    save_pickle(df_fob)
+    try:
+        dfs_fob = pd.read_html('http://www.ipeadata.gov.br/ExibeSerie.aspx?module=m&serid=1650971490&oper=view')
+        df_fob = dfs_fob[2]
+        df_fob.columns = ['data', 'preco']
+        df_fob.drop(index=0, inplace=True)
+        df_fob['preco'] = df_fob['preco'].apply(conv_float)
+        df_fob['data'] = pd.to_datetime(df_fob['data'], format='%d/%m/%Y')
+        return df_fob
+    except:
+        st.warning('Não foi possível atualizar os dados')
 
 def save_pickle(df:pd.DataFrame):
     caminho_do_arquivo = 'df_fob.p'
@@ -391,6 +394,7 @@ def criar_figura_matplotlib_agrupado(df, tipos_agrupamento:list, periodo):
     return fig
 
 # Carrega dataframe com as colunas preco e data
+
 file = open('./df_fob.p', 'rb')
 df_fob = pickle.load(file)
 file.close()
@@ -435,7 +439,7 @@ with tab_projeto:
     btn_atualizar = st.button('Atualizar dados')
     if btn_atualizar:
         with st.spinner('Atualizando dados...'):
-            transform_dataframe_web()
+            df_fob = transform_dataframe_web()
 
     st.subheader('Modelo da análise')
     st.write("""
@@ -539,8 +543,12 @@ with tab_projeto:
         try:
             with st.spinner('Carregando dados mais atualizados para o modelo'):
                 ipeadata = pd.read_html(r"http://www.ipeadata.gov.br/ExibeSerie.aspx?module=m&serid=1650971490&oper=view", encoding='utf-8', header=0)[2]
-                ipeadata.to_pickle('df_fob.pkl')
-            
+                #ipeadata.to_pickle('df_fob.pkl')
+                if ipeadate.shape[0] < 0:
+                    file = open('./df_fob.pkl', 'rb')
+                    ipeadata = pickle.load(file)
+                    file.close()
+                    
         except Exception:
             file = open('./df_fob.pkl', 'rb')
             ipeadata = pickle.load(file)
