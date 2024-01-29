@@ -283,6 +283,7 @@ def transform_dataframe_web():
         df_fob = pickle.load(file)
         file.close()
         st.warning('Não foi possível atualizar os dados')
+        df_fob = apply_model(df_fob)
         return df_fob
 
 def save_pickle(df:pd.DataFrame):
