@@ -345,8 +345,7 @@ dic_group_keys = {
             }
 
 def group_sum(df, periodo):
-    print(dic_group_keys[periodo])
-    print(df.head())
+    st.write(dic_group_keys[periodo])
     df_fob_grouped = df.groupby(dic_group_keys[periodo]).sum()
     df_fob_grouped['x'] = df_fob_grouped.index 
     return df_fob_grouped
