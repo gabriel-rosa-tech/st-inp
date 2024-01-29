@@ -279,7 +279,11 @@ def transform_dataframe_web():
         df_fob['data'] = pd.to_datetime(df_fob['data'], format='%d/%m/%Y')
         return df_fob
     except:
+        file = open('./df_fob.p', 'rb')
+        df_fob = pickle.load(file)
+        file.close()
         st.warning('Não foi possível atualizar os dados')
+        return df_fob
 
 def save_pickle(df:pd.DataFrame):
     caminho_do_arquivo = 'df_fob.p'
