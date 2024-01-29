@@ -410,7 +410,7 @@ with tab_projeto:
 
         A unidade de medida usada é em dolares (US$)
             
-        ***Link da fonte de dados: http://www.ipeadata.gov.br/ExibeSerie.aspx***
+        ***Link da fonte de dados: http://www.ipeadata.gov.br/ExibeSerie.aspx?module=m&serid=1650971490&oper=view***
     ''')
 
     st.write('O dicionario dos dados é o seguinte:')
