@@ -345,12 +345,12 @@ dic_group_keys = {
             }
 
 def group_sum(df, periodo):
+    df = df[['preco', dic_group_keys[periodo]]]
     df_fob_grouped = df.groupby(dic_group_keys[periodo]).sum()
     df_fob_grouped['x'] = df_fob_grouped.index 
     return df_fob_grouped
 
 def group_mean(df, periodo):
-    st.write('df_media')
     df = df[['preco', dic_group_keys[periodo]]]
     df_fob_grouped = df.groupby(dic_group_keys[periodo]).mean()
     df_fob_grouped['x'] = df_fob_grouped.index 
