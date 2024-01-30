@@ -418,7 +418,7 @@ tab_projeto, tab_fonte = st.tabs(['Projeto', 'Fonte'])
 
 with tab_projeto:
     st.write('''
-        O projeto apresentado, usa dados do preço do barril do petrólep bruto Brent (FOB) 
+        O projeto apresentado, usa dados do preço do barril do petróleo bruto Brent (FOB) 
         extraídos do site Energy Information Administration (EIA) - http://www.eia.doe.gov 
         para elaborar um modelo da previsão dos dados. Preço por barril do petróleo bruto tipo Brent. 
         Produzido no Mar do Norte (Europa), 
@@ -426,7 +426,7 @@ with tab_projeto:
         de diferentes tipos de petróleo. Neste caso, é valorado no chamado preço FOB (free on board),
         que não inclui despesa de frete e seguro no preço.
 
-        A unidade de medida usada é em dolares (US$)
+        ***Unidade de medida utilizada: Dolar (US$).***
             
         ***Link da fonte de dados: http://www.ipeadata.gov.br/ExibeSerie.aspx?module=m&serid=1650971490&oper=view***
     ''')
@@ -522,23 +522,23 @@ with tab_projeto:
 
         else:
             st.markdown(" <h3>Eventos</h3> \
-                            <p>Acontecimentos que podem ter tido relação direta com os valores apresentados</p>\
-                            <li>Crise Financeira Americana (2008)</li> \
-            <li>Primavera Árabe (2011)</li>\
-            <li>Pandemia de COVID-19 (2019)</li> \
-            <li>Tendência de Energias Renováveis (2020)</li> ", unsafe_allow_html=True)
-
-            st.write('Contagem dos registros: ' + str(df_fob.shape[0]))
+                            <p>Acontecimentos que podem ter tido relação direta com os valores apresentados:</p>\
+                            <li>Crise Financeira Americana (2008);</li> \
+            <li>Primavera Árabe (2011);</li>\
+            <li>Pandemia de COVID-19 (2019);</li> \
+            <li>Tendência de Energias Renováveis (2020).</li> ", unsafe_allow_html=True)
+            st.write('')
+            st.write('Contagem dos registros: ' + str(df_fob.shape[0]) + '.')
 
             # inp_valores =  st.multiselect('Valores de analise', ['preco', 'aumento','aceleracao'], 'preco')
             # if len(inp_valores) > 0:
             #     st.line_chart(data=df_fob, x='data', y=inp_valores)
 
-            st.write('Variação do preço do petróleo')
+            st.subheader('Variação do preço do petróleo:')
             st.plotly_chart(criar_figura_matplotlib(df_fob,'data','preco',tipo_grafico='line',titulo='',
                                                     xlabel='Data', ylabel='Preço'))
             
-            st.write('Composição do preço do petróleo')
+            st.subheader('Composição do preço do petróleo:')
             st.plotly_chart(criar_figura_matplotlib(df_fob,'data','preco',tipo_grafico='hist',titulo='',
                                                     xlabel='Data', ylabel='Preço'))
 
@@ -615,7 +615,7 @@ with tab_projeto:
             
             st.plotly_chart(fig)
 
-            st.write('Previsão para o periodo selecionado de ' + str(dic_periodo[periodo]) + ' dias')
+            st.write('Previsão para o periodo selecionado de ' + str(dic_periodo[periodo]) + ' dias:')
             st.write(df_and_future[['pred']].tail(dic_periodo[periodo]))
         else:
             pass
