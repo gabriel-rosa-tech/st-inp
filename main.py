@@ -535,7 +535,7 @@ with tab_projeto:
             # if len(inp_valores) > 0:
             #     st.line_chart(data=df_fob, x='data', y=inp_valores)
 
-            st.markdown("<h1>Variação do preço do petróleo:</h1>", unsafe_allow_html=True)
+            st.markdown("<h5>Variação do preço do petróleo:</h5>", unsafe_allow_html=True)
             st.plotly_chart(criar_figura_matplotlib(df_fob,'data','preco',tipo_grafico='line',titulo='',
                                                     xlabel='Data', ylabel='Preço'))
             
