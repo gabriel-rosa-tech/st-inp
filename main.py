@@ -521,6 +521,7 @@ with tab_projeto:
             st.plotly_chart(fig_graph)
 
         else:
+            st.divider()
             st.markdown(" <h3>Eventos</h3> \
                             <p>Acontecimentos que podem ter tido relação direta com os valores apresentados:</p>\
                             <li>Crise Financeira Americana (2008);</li> \
@@ -534,11 +535,11 @@ with tab_projeto:
             # if len(inp_valores) > 0:
             #     st.line_chart(data=df_fob, x='data', y=inp_valores)
 
-            st.subheader('Variação do preço do petróleo:')
+            st.markdown('<h4>Variação do preço do petróleo:</h4>', unsafe_allow_html=True))
             st.plotly_chart(criar_figura_matplotlib(df_fob,'data','preco',tipo_grafico='line',titulo='',
                                                     xlabel='Data', ylabel='Preço'))
             
-            st.subheader('Composição do preço do petróleo:')
+            st.markdown('<h4>Composição do preço do petróleo:</h4>', unsafe_allow_html=True))
             st.plotly_chart(criar_figura_matplotlib(df_fob,'data','preco',tipo_grafico='hist',titulo='',
                                                     xlabel='Data', ylabel='Preço'))
 
