@@ -614,7 +614,7 @@ with tab_projeto:
                 'Mensal': 30
             }
             
-            st.plotly_chart(fig)
+            st.plotly_chart(fig, se_container_width=True)
 
             st.write('Previsão para o periodo selecionado de ' + str(dic_periodo[periodo]) + ' dias:')
             st.write(df_and_future[['pred']].tail(dic_periodo[periodo]))
